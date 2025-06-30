@@ -4,22 +4,33 @@ import jwt from 'jsonwebtoken'
 import appointmentModel from "../models/appointmentModel.js"
 
 
-const changeAvailability = async (req,res) =>{
+const changeAvailability = async (req, res) => {
+  try {
+    const { doctorId } = req.body; // ✅ get docId from body
 
-    try {
-
-        const docId =req.docId
-
-        const docData = await doctorModel.findById(docId)
-        await doctorModel.findByIdAndUpdate(docId,{available: !docData.available})
-        res.json({success:true,message:'Availability Changed'})
-        
-    } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
+    if (!doctorId) {
+      return res.status(400).json({ success: false, message: "Doctor ID not provided" });
     }
 
-}
+    const docData = await doctorModel.findById(doctorId);
+
+    if (!docData) {
+      return res.status(404).json({ success: false, message: "Doctor not found" });
+    }
+
+    const updatedDoctor = await doctorModel.findByIdAndUpdate(
+      doctorId,
+      { available: !docData.available },
+      { new: true }
+    );
+
+    res.json({ success: true, message: 'Availability Changed', available: updatedDoctor.available });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 
 
 const doctorList = async  (req,res) =>{

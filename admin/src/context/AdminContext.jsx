@@ -18,7 +18,7 @@ const AdminContextProvider = (props) =>{
 
         try {
 
-            const {data} = await axios.post(backendUrl + '/api/admin/all-doctors',{},{headers:{aToken}})
+            const {data} = await axios.post(backendUrl + '/api/admin/all-doctors',{},{headers:{token: aToken}})
             if(data.success){
                 setDoctors(data.doctors)
                 console.log(data.doctors)
@@ -35,7 +35,7 @@ const AdminContextProvider = (props) =>{
     const changeAvailability = async (docId) =>{
         try {
 
-            const {data} = await axios.post(backendUrl + '/api/admin/change-availability',{docId},{headers:{aToken}})
+            const {data} = await axios.post(backendUrl + '/api/admin/change-availability',{doctorId: docId},{headers:{token : aToken}})
             if(data.success){
                 toast.success(data.message)
                 getAllDoctors()
