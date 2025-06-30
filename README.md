@@ -9,6 +9,6 @@ JWT-based authentication, responsive UI with React and Tailwind CSS and RESTful 
 
 Deployment:-
 
-frontend: https://doctors-appointment-booking-system-emho.onrender.com
-admin: https://doctors-appointment-booking-system-admin.onrender.com
+frontend: https://doctors-appointment-booking-system-emho.onrender.com <br>
+admin: https://doctors-appointment-booking-system-admin.onrender.com <br>
 backend: https://doctors-appointment-booking-system-o02n.onrender.com
